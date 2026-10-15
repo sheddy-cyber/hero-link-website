@@ -54,9 +54,9 @@ export const metadata: Metadata = {
       { url: "/favicon.ico" },
       { url: "/images/favicon-16x16.png", sizes: "16x16", type: "image/png" },
       { url: "/images/favicon-32x32.png", sizes: "32x32", type: "image/png" },
-      { url: "/images/logo.png", sizes: "192x192", type: "image/png" },
+      { url: "/images/icon-192x192.png", sizes: "192x192", type: "image/png" },
     ],
-    apple: "/images/logo.png",
+    apple: "/images/apple-touch-icon.png",
   },
 };
 
@@ -76,7 +76,7 @@ export default function RootLayout({
     description:
       "Leading computer training centre in Ibeju-Lekki, Lagos offering professional IT courses, computer maintenance, and equipment sales.",
     telephone: "+2348032310325",
-    email: "modemcomputers247@gmail.com",
+    email: "info@herolinksystems.com",
     address: {
       "@type": "PostalAddress",
       streetAddress: "Elemoro Shopping Complex, Bogije Bus-stop",
@@ -128,8 +128,8 @@ export default function RootLayout({
         },
         {
           "@type": "Course",
-          name: "Frontend Web Design",
-          description: "HTML, CSS, JavaScript web development training",
+          name: "Full-Stack Web Development With AI",
+          description: "Students learn the basics of coding and how to use AI to build websites",
           provider: {
             "@type": "EducationalOrganization",
             name: "Hero Link Systems Limited",

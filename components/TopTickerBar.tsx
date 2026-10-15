@@ -31,7 +31,7 @@ const TICKER_ITEMS: TickerItem[] = [
     iconColor: "text-white",
     tag: "Admissions Open",
     tagBg: "bg-blue-600 text-white border-transparent shadow-xs",
-    text: "Professional IT Training: Web Design, Graphic Design & Computer Maintenance Cohorts",
+    text: "Professional IT Training: Full-Stack Web Development with AI, Graphic Design & Computer Maintenance Cohorts",
     actionLabel: "Explore Courses",
     actionHref: "/#courses",
   },

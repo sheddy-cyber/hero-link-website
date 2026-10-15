@@ -24,9 +24,9 @@ cp .env.example .env.local
 ```
 Then edit `.env.local` with your real values:
 ```
-EMAIL_USER=modemcomputers247@gmail.com
-EMAIL_PASS=your_gmail_app_password   # NOT your regular password
-EMAIL_TO=modemcomputers247@gmail.com
+EMAIL_USER=info@herolinksystems.com
+EMAIL_PASS=your_email_password_or_app_password
+EMAIL_TO=info@herolinksystems.com
 NEXT_PUBLIC_SITE_URL=https://www.herolinksystems.com
 ```
 

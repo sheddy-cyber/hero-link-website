@@ -162,11 +162,14 @@ export default function AccessoriesGallery() {
       </div>
 
       {/* ── PRODUCT GRID ── */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-10">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pb-12 sm:pb-16">
         {visible.length === 0 ? (
-          <p className="py-20 text-center text-slate-400 text-sm">
-            No items found in this category.
-          </p>
+          <div className="py-24 text-center">
+            <Package className="w-12 h-12 text-slate-300 mx-auto mb-3" />
+            <p className="text-slate-500 text-sm font-medium">
+              No items found in this category.
+            </p>
+          </div>
         ) : (
           <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-3 sm:gap-4">
             {visible.map((item) => (
@@ -174,23 +177,23 @@ export default function AccessoriesGallery() {
                 key={item.id}
                 type="button"
                 onClick={() => setSelected(item)}
-                className="group bg-white rounded-xl border border-slate-100 shadow-sm hover:shadow-lg hover:-translate-y-0.5 active:scale-95 transition-all duration-200 overflow-hidden text-left cursor-pointer p-0"
+                className="group bg-white rounded-2xl border border-slate-200/80 shadow-card hover:shadow-card-hover hover:border-blue-300 hover:-translate-y-1 active:scale-[0.98] transition-all duration-200 overflow-hidden text-left cursor-pointer p-0 flex flex-col justify-between"
               >
-                <div className="relative aspect-square bg-slate-50 overflow-hidden">
+                <div className="relative aspect-square bg-slate-50 overflow-hidden w-full">
                   <Image
                     src={item.image}
                     alt={item.name}
                     fill
                     sizes="(max-width: 640px) 50vw, (max-width: 768px) 33vw, (max-width: 1024px) 25vw, 18vw"
-                    className="object-contain p-1.5 sm:p-2 group-hover:scale-105 transition-transform duration-300"
+                    className="object-contain p-2 sm:p-2.5 group-hover:scale-105 transition-transform duration-300"
                     loading="lazy"
                   />
                 </div>
-                <div className="p-2 sm:p-3">
-                  <p className="text-[10px] sm:text-xs font-semibold text-slate-800 leading-snug line-clamp-2">
+                <div className="p-2.5 sm:p-3 w-full border-t border-slate-100">
+                  <p className="text-[11px] sm:text-xs font-semibold text-slate-900 leading-snug line-clamp-2">
                     {item.name}
                   </p>
-                  <span className="inline-block mt-1 text-[9px] sm:text-[10px] text-slate-400 capitalize leading-none">
+                  <span className="inline-block mt-1 text-[9px] sm:text-[10px] text-blue-600 font-medium capitalize leading-none">
                     {categoryLabels[item.category]}
                   </span>
                 </div>
@@ -200,12 +203,12 @@ export default function AccessoriesGallery() {
         )}
 
         {/* ── LOAD MORE ── */}
-        <div className="flex justify-center mt-10">
+        <div className="flex justify-center mt-10 sm:mt-12">
           {hasMore ? (
             <button
               type="button"
               onClick={() => setPage((p) => p + 1)}
-              className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 bg-blue-600 hover:bg-blue-700 active:bg-blue-800 text-white font-semibold rounded-xl shadow-sm hover:shadow-md transition-all duration-150 cursor-pointer border-0"
+              className="inline-flex items-center justify-center gap-2 px-6 sm:px-8 py-3.5 bg-blue-600 hover:bg-blue-500 active:scale-[0.98] text-white font-semibold rounded-xl shadow-md shadow-blue-600/25 transition-all duration-200 cursor-pointer border-0 text-sm"
             >
               <PlusCircle className="w-[17px] h-[17px]" />
               <span>
@@ -214,8 +217,8 @@ export default function AccessoriesGallery() {
               </span>
             </button>
           ) : (
-            <span className="inline-flex items-center gap-2 px-6 py-3 bg-slate-100 text-slate-500 rounded-xl text-sm font-medium">
-              <CheckCircle className="w-4 h-4 text-green-500" />
+            <span className="inline-flex items-center gap-2 px-6 py-3 bg-slate-100 border border-slate-200/60 text-slate-600 rounded-xl text-xs sm:text-sm font-medium">
+              <CheckCircle className="w-4 h-4 text-emerald-500" />
               All {total} items loaded
             </span>
           )}
@@ -224,19 +227,20 @@ export default function AccessoriesGallery() {
     </div>
 
       {/* ── READY TO PURCHASE CTA ── */}
-      <section className="bg-gradient-to-br from-slate-900 via-blue-950 to-slate-900 py-16">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <section className="relative bg-slate-950 text-white overflow-hidden hero-ambient-mesh border-t border-slate-800/80 py-16 sm:py-20">
+        <div className="absolute inset-0 hero-grid-pattern opacity-20 pointer-events-none" />
+        <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex flex-col lg:flex-row items-center justify-between gap-8">
 
-            <div className="flex items-start gap-5 text-white">
-              <div className="w-14 h-14 rounded-2xl bg-blue-500/20 border border-blue-400/30 flex items-center justify-center shrink-0 mt-1">
-                <ShoppingBag className="w-7 h-7 text-blue-300" />
+            <div className="flex items-start gap-4 sm:gap-5 text-white">
+              <div className="w-12 h-12 sm:w-14 sm:h-14 rounded-2xl bg-blue-600/20 border border-blue-400/30 flex items-center justify-center shrink-0 mt-1 shadow-lg shadow-blue-500/10">
+                <ShoppingBag className="w-6 h-6 sm:w-7 sm:h-7 text-blue-300" />
               </div>
               <div>
-                <h2 className="font-heading text-2xl sm:text-3xl font-bold mb-2">
+                <h2 className="font-heading text-2xl sm:text-3xl lg:text-4xl font-black tracking-tight mb-2">
                   Ready to Make a Purchase?
                 </h2>
-                <p className="text-blue-200 max-w-lg leading-relaxed text-[15px]">
+                <p className="text-slate-300 max-w-lg leading-relaxed text-sm sm:text-base">
                   Contact us via phone or WhatsApp to enquire about pricing,
                   availability, and delivery. All products come with after-sales support.
                 </p>
@@ -246,7 +250,7 @@ export default function AccessoriesGallery() {
             <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto shrink-0">
               <a
                 href="tel:+2348032310325"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-blue-600 hover:bg-blue-500 text-white font-semibold rounded-xl shadow-lg shadow-blue-500/30 transition-all hover:scale-105 whitespace-nowrap text-[15px]"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-blue-600 hover:bg-blue-500 active:scale-[0.98] text-white font-semibold rounded-xl shadow-md shadow-blue-600/25 transition-all whitespace-nowrap text-sm sm:text-base"
               >
                 <Phone className="w-[17px] h-[17px]" />
                 Call Us Now
@@ -255,14 +259,14 @@ export default function AccessoriesGallery() {
                 href="https://wa.me/2348032310325?text=Hi%2C%20I%27d%20like%20to%20enquire%20about%20your%20products."
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-green-600 hover:bg-green-500 text-white font-semibold rounded-xl shadow-lg shadow-green-500/30 transition-all hover:scale-105 whitespace-nowrap text-[15px]"
+                className="inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-emerald-600 hover:bg-emerald-500 active:scale-[0.98] text-white font-semibold rounded-xl shadow-md shadow-emerald-600/25 transition-all whitespace-nowrap text-sm sm:text-base"
               >
                 <MessageCircle className="w-[17px] h-[17px]" />
                 WhatsApp
               </a>
               <a
                 href="/#contact"
-                className="arrow-link inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/10 hover:bg-white/20 border border-white/20 text-white font-semibold rounded-xl backdrop-blur-sm transition-all whitespace-nowrap text-[15px]"
+                className="arrow-link inline-flex items-center justify-center gap-2 px-6 py-3.5 bg-white/[0.07] hover:bg-white/[0.12] active:scale-[0.98] border border-white/15 text-white font-semibold rounded-xl backdrop-blur-md transition-all whitespace-nowrap text-sm sm:text-base"
               >
                 Send Enquiry
                 <span className="arrow-icon"><ArrowRight className="w-4 h-4" /></span>
@@ -278,10 +282,10 @@ export default function AccessoriesGallery() {
           role="dialog"
           aria-modal="true"
           aria-label={selected.name}
-          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/70 p-4 backdrop-blur-sm"
+          className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/75 p-4 backdrop-blur-md animate-fade-in"
           onClick={(e) => { if (e.target === e.currentTarget) setSelected(null); }}
         >
-          <div className="bg-white rounded-2xl shadow-2xl max-w-lg w-full overflow-hidden">
+          <div className="bg-white rounded-3xl shadow-2xl border border-slate-100 max-w-lg w-full overflow-hidden animate-fade-up">
 
             {/* Image */}
             <div className="relative aspect-[4/3] bg-slate-50">
@@ -289,47 +293,47 @@ export default function AccessoriesGallery() {
                 src={selected.image}
                 alt={selected.name}
                 fill
-                className="object-contain p-4"
+                className="object-contain p-6"
                 sizes="500px"
               />
               <button
                 type="button"
                 onClick={() => setSelected(null)}
                 aria-label="Close"
-                className="absolute top-3 right-3 w-9 h-9 flex items-center justify-center bg-black/50 hover:bg-black/70 text-white rounded-full transition-colors border-0 cursor-pointer"
+                className="absolute top-3.5 right-3.5 w-9 h-9 flex items-center justify-center bg-slate-900/60 hover:bg-slate-900/90 active:scale-95 text-white rounded-full transition-all border-0 cursor-pointer backdrop-blur-sm"
               >
                 <X className="w-[18px] h-[18px]" />
               </button>
             </div>
 
             {/* Info */}
-            <div className="p-6">
-              <h3 className="font-heading font-bold text-xl text-slate-900 mb-1">
+            <div className="p-6 sm:p-7">
+              <h3 className="font-heading font-black text-xl text-slate-900 mb-1">
                 {selected.name}
               </h3>
-              <span className="text-sm text-slate-400 capitalize">
+              <span className="inline-flex items-center gap-1.5 text-xs font-semibold text-blue-600 bg-blue-50 border border-blue-100 rounded-full px-2.5 py-0.5 capitalize">
                 {categoryLabels[selected.category]}
               </span>
 
-              <div className="border-t border-slate-100 mt-4 pt-4">
-                <p className="text-sm text-slate-500 mb-4">
-                  Interested in this product?
+              <div className="border-t border-slate-100 mt-5 pt-5">
+                <p className="text-xs sm:text-sm text-slate-500 mb-4 font-medium">
+                  Interested in this product? Speak with our sales desk:
                 </p>
                 <div className="flex gap-3 flex-wrap">
                   <a
                     href="tel:+2348032310325"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-xl text-sm transition-colors"
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-blue-600 hover:bg-blue-500 active:scale-[0.98] text-white font-semibold rounded-xl text-sm transition-all shadow-md shadow-blue-600/20"
                   >
-                    <Phone className="w-[14px] h-[14px]" />
+                    <Phone className="w-[15px] h-[15px]" />
                     Call Now
                   </a>
                   <a
                     href={`https://wa.me/2348032310325?text=Hi%2C%20I%27m%20interested%20in%20${encodeURIComponent(selected.name)}`}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-green-600 hover:bg-green-700 text-white font-semibold rounded-xl text-sm transition-colors"
+                    className="flex-1 inline-flex items-center justify-center gap-2 px-5 py-3 bg-emerald-600 hover:bg-emerald-500 active:scale-[0.98] text-white font-semibold rounded-xl text-sm transition-all shadow-md shadow-emerald-600/20"
                   >
-                    <MessageCircle className="w-[14px] h-[14px]" />
+                    <MessageCircle className="w-[15px] h-[15px]" />
                     WhatsApp
                   </a>
                 </div>
