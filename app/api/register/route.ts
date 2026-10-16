@@ -81,27 +81,39 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Validation failed.", errors }, { status: 422 });
   }
 
-  // Send email
-  const emailUser = process.env.EMAIL_USER;
+  // Send email via Zoho Mail SMTP
+  const emailUser = process.env.EMAIL_USER || "info@herolinksystems.com";
   const emailPass = process.env.EMAIL_PASS;
-  const emailTo = process.env.EMAIL_TO ?? emailUser;
+  const emailTo = process.env.EMAIL_TO || "info@herolinksystems.com";
+  const smtpHost = process.env.SMTP_HOST || "smtppro.zoho.com";
+  const smtpPort = Number(process.env.SMTP_PORT || 465);
+  const smtpSecure = process.env.SMTP_SECURE !== undefined ? process.env.SMTP_SECURE === "true" : smtpPort === 465;
 
-  if (!emailUser || !emailPass) {
-    console.error("Email credentials not configured. Set EMAIL_USER and EMAIL_PASS in .env.local");
+  if (!emailPass) {
+    console.error(
+      "[Registration API] EMAIL_PASS is not configured. Set EMAIL_PASS (Zoho App Password) in .env.local to send enquiries to " + emailTo
+    );
     // Still return success to user — don't leak config state
     return NextResponse.json({ message: "Registration received.", data: { name, phone } });
   }
 
   const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: { user: emailUser, pass: emailPass },
+    host: smtpHost,
+    port: smtpPort,
+    secure: smtpSecure,
+    auth: {
+      user: emailUser,
+      pass: emailPass,
+    },
+    connectionTimeout: 10000,
+    greetingTimeout: 10000,
   });
 
   const mailOptions = {
-    from: `"Hero Link Systems Limited Website" <${emailUser}>`,
+    from: `"Hero Link Systems Limited" <${emailUser}>`,
     to: emailTo,
     replyTo: email || undefined,
-    subject: `New Enquiry from ${name}`,
+    subject: `New Enquiry from ${name}${course ? ` — ${course}` : ""}`,
     text: [
       "New Registration / Enquiry",
       "─".repeat(40),
@@ -112,23 +124,26 @@ export async function POST(req: NextRequest) {
       `Message: ${message || "—"}`,
     ].join("\n"),
     html: `
-      <div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:24px;border:1px solid #e2e8f0;border-radius:12px">
-        <h2 style="color:#1e40af;margin:0 0 20px">New Enquiry — Hero Link Systems Limited</h2>
+      <div style="font-family:sans-serif;max-width:560px;margin:0 auto;padding:24px;border:1px solid #e2e8f0;border-radius:12px;background:#ffffff">
+        <h2 style="color:#1d4ed8;margin:0 0 16px;font-size:20px">New Website Enquiry — Hero Link Systems</h2>
+        <p style="color:#64748b;font-size:13px;margin:0 0 20px">A new enquiry has been submitted via the contact form on herolinksystems.com.</p>
         <table style="width:100%;border-collapse:collapse;font-size:14px">
           ${[
-            ["Name", name],
-            ["Phone", phone],
-            ["Email", email || "—"],
-            ["Course / Area", course || "—"],
-            ["Message", message || "—"],
+            ["Full Name", name],
+            ["Phone Number", `<a href="tel:${phone}" style="color:#2563eb;text-decoration:none">${phone}</a>`],
+            ["Email Address", email ? `<a href="mailto:${email}" style="color:#2563eb;text-decoration:none">${email}</a>` : "—"],
+            ["Area of Enquiry", course || "General Enquiry"],
+            ["Message", message ? message.replace(/\n/g, "<br/>") : "—"],
           ].map(([k, v]) => `
             <tr>
-              <td style="padding:10px 0;border-bottom:1px solid #f1f5f9;color:#64748b;width:120px;vertical-align:top"><strong>${k}</strong></td>
+              <td style="padding:10px 0;border-bottom:1px solid #f1f5f9;color:#64748b;width:130px;vertical-align:top"><strong>${k}</strong></td>
               <td style="padding:10px 0;border-bottom:1px solid #f1f5f9;color:#0f172a">${v}</td>
             </tr>
           `).join("")}
         </table>
-        <p style="margin:20px 0 0;font-size:12px;color:#94a3b8">Sent from herolinksystems.com</p>
+        <div style="margin:24px 0 0;padding-top:16px;border-top:1px solid #e2e8f0;font-size:12px;color:#94a3b8">
+          <span>Sent to: <strong>${emailTo}</strong> via Hero Link Systems Web Portal</span>
+        </div>
       </div>`,
   };
 

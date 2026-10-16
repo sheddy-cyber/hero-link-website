@@ -8,7 +8,7 @@ A full-featured Next.js 14 website for Hero Link Systems Limited, converted from
 - **Language**: TypeScript
 - **Styling**: Tailwind CSS
 - **Icons**: Lucide React
-- **Email**: Nodemailer (via Gmail App Password)
+- **Email**: Nodemailer (via Zoho Mail SMTP)
 - **Fonts**: Next.js Google Fonts (Plus Jakarta Sans + Poppins)
 
 ## Getting Started
@@ -22,16 +22,18 @@ npm install
 ```bash
 cp .env.example .env.local
 ```
-Then edit `.env.local` with your real values:
+Then edit `.env.local` with your Zoho credentials:
 ```
+SMTP_HOST=smtppro.zoho.com
+SMTP_PORT=465
+SMTP_SECURE=true
 EMAIL_USER=info@herolinksystems.com
-EMAIL_PASS=your_email_password_or_app_password
+EMAIL_PASS=your_zoho_app_password
 EMAIL_TO=info@herolinksystems.com
 NEXT_PUBLIC_SITE_URL=https://www.herolinksystems.com
 ```
 
-> ⚠️ **Important:** Generate a Gmail App Password at https://myaccount.google.com/apppasswords.  
-> The old hardcoded password in `index.js` should be **revoked immediately**.
+> 💡 **Zoho Mail Setup:** Generate an Application-Specific Password in [Zoho Accounts](https://accounts.zoho.com) -> **Security** -> **Application-Specific Passwords**. Set it as `EMAIL_PASS`.
 
 ### 3. Run development server
 ```bash
@@ -82,7 +84,7 @@ modem-nextjs/
 
 | Issue | Fix |
 |---|---|
-| Hardcoded Gmail app password in `index.js` | Moved to `process.env.EMAIL_PASS` in `.env.local` |
+| Hardcoded email password in legacy code | Moved to secure SMTP environment variables in `.env.local` |
 | No input sanitisation on form POST | All fields sanitised (length-limited, angle brackets stripped) |
 | No rate limiting | In-memory rate limiter: 5 req/min per IP on `/api/register` |
 | `X-Powered-By: Express` header | Removed via `poweredByHeader: false` in `next.config.ts` |

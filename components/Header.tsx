@@ -302,12 +302,9 @@ export default function Header() {
                 className="object-contain"
               />
             </div>
-            <div>
-              <span className="font-heading font-bold text-xs text-slate-900 block leading-none">
-                Hero Link Systems
-              </span>
-              <span className="text-[10px] text-slate-500 font-medium">Menu Navigation</span>
-            </div>
+            <span className="font-heading font-bold text-xs text-slate-900 block leading-tight">
+              Hero Link Systems Limited
+            </span>
           </div>
           <button
             onClick={close}
