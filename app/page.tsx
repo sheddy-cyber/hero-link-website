@@ -254,8 +254,8 @@ export default function Home() {
                 <div className="relative rounded-2xl sm:rounded-3xl overflow-hidden border border-white/10 shadow-card-dark group bg-slate-900">
                   <div className="relative aspect-[4/3] w-full">
                     <Image
-                      src="/images/computer_lab.jpg"
-                      alt="Hero Link Systems modern computer lab in Ibeju-Lekki"
+                      src="/images/hero_image.jpg"
+                      alt="Students learning at Hero Link Systems computer lab in Bogije, Ibeju-Lekki"
                       fill
                       sizes="(max-width: 1024px) 100vw, 40vw"
                       className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"

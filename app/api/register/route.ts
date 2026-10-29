@@ -85,7 +85,7 @@ export async function POST(req: NextRequest) {
   const emailUser = process.env.EMAIL_USER || "info@herolinksystems.com";
   const emailPass = process.env.EMAIL_PASS;
   const emailTo = process.env.EMAIL_TO || "info@herolinksystems.com";
-  const smtpHost = process.env.SMTP_HOST || "smtppro.zoho.com";
+  const smtpHost = process.env.SMTP_HOST || "smtp.zoho.com";
   const smtpPort = Number(process.env.SMTP_PORT || 465);
   const smtpSecure = process.env.SMTP_SECURE !== undefined ? process.env.SMTP_SECURE === "true" : smtpPort === 465;
 

@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     title: "Computer Accessories & Laptops in Ibeju-Lekki, Lagos",
     description:
       "Browse and buy laptops, printers, and computer accessories from Hero Link Systems Limited in Ibeju-Lekki, Lagos.",
-    images: ["/images/computer_lab.jpg"],
+    images: ["/images/hero_image.jpg"],
   },
 };
 

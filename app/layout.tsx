@@ -1,13 +1,13 @@
 import type { Metadata } from "next";
-import { Raleway } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import SmoothScroll from "@/components/SmoothScroll";
 
-const raleway = Raleway({
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "600", "700", "800", "900"],
+const raleway = localFont({
+  src: "../public/fonts/raleway-variable.woff2",
   variable: "--font-raleway",
   display: "swap",
+  weight: "100 900",
 });
 
 const siteUrl =
@@ -41,13 +41,13 @@ export const metadata: Metadata = {
     title: "Hero Link Systems Limited — Professional IT Training in Lagos",
     description:
       "Practical computer training, maintenance and procurement in Ibeju-Lekki, Lagos. Learn web design, graphic design, and more.",
-    images: [{ url: "/images/computer_lab.jpg", width: 1200, height: 630 }],
+    images: [{ url: "/images/hero_image.jpg", width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: "Hero Link Systems Limited — IT Training in Lagos",
     description: "Professional computer training in Ibeju-Lekki, Lagos",
-    images: ["/images/computer_lab.jpg"],
+    images: ["/images/hero_image.jpg"],
   },
   icons: {
     icon: [
@@ -72,7 +72,7 @@ export default function RootLayout({
     alternateName: "Hero Link Systems",
     url: siteUrl,
     logo: `${siteUrl}/images/logo.png`,
-    image: `${siteUrl}/images/computer_lab.jpg`,
+    image: `${siteUrl}/images/hero_image.jpg`,
     description:
       "Leading computer training centre in Ibeju-Lekki, Lagos offering professional IT courses, computer maintenance, and equipment sales.",
     telephone: "+2348032310325",
